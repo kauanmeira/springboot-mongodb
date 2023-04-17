@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.TimeZone;
 
+import com.nelioalves.workshopmongo.dto.AuthorDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -34,11 +35,12 @@ public class Instantiation implements CommandLineRunner {
         User maria = new User(null, "Maria Brown", "maria@gmail.com");
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
-
-        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Let's travel", "I'm going to New York!", maria);
-        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Good Morning", "Good morning guys, what's up?!", maria);
-
         userReposiroty.saveAll(Arrays.asList(maria, alex, bob));
+
+
+        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Let's travel", "I'm going to New York!", new AuthorDTO(maria));
+        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Good Morning", "Good morning guys, what's up?!", new AuthorDTO(maria));
+
         postReposiroty.saveAll(Arrays.asList(post1, post2));
     }
 
